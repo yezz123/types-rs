@@ -8,7 +8,7 @@ use core::str::FromStr;
 use num_bigint::{BigInt, BigUint, Sign};
 use num_integer::Integer;
 use num_traits::{One, Zero};
-use size_of::SizeOf;
+use feldera_size_of::SizeOf;
 #[cfg(any(feature = "prime-bigint", test))]
 use {lazy_static::lazy_static, num_traits::Num};
 
@@ -46,7 +46,7 @@ use arbitrary::{self, Arbitrary, Unstructured};
 pub struct Felt(pub(crate) FieldElement<Stark252PrimeField>);
 
 impl SizeOf for Felt {
-    fn size_of_children(&self, _context: &mut size_of::Context) {}
+    fn size_of_children(&self, _context: &mut feldera_size_of::Context) {}
 }
 
 /// A non-zero [Felt].
@@ -914,7 +914,7 @@ mod serde_impl {
         type Value = Felt;
 
         fn expecting(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
-            // The message below is append to “This Visitor expects to receive …”
+            // The message below is append to "This Visitor expects to receive ..."
             write!(
                 formatter,
                 "a 32 byte array ([u8;32]) or a hexadecimal string."
@@ -1077,7 +1077,7 @@ mod test {
     use core::ops::Shl;
     use proptest::prelude::*;
     use regex::Regex;
-    use size_of::TotalSize;
+    use feldera_size_of::TotalSize;
 
     #[test]
     fn test_debug_format() {
